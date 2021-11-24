@@ -1,0 +1,170 @@
+:root {
+    --border: solid 1px black;
+    --btn-border: solid 1px #0d5fb5;
+    --button-colour: #2590FF;
+    --correct: #9befab;
+    --grey-bg: #ddd;
+    --radius: 5px;
+    --wrong: #f49797;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    letter-spacing: 0.5px;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 50px;
+}
+
+form {
+    background: var(--grey-bg);
+    border: var(--border);
+    border-radius: var(--radius);
+    margin: 100px auto 1px;
+    padding: 50px 20px;
+    width: 400px;
+}
+
+label {
+    display: block;
+    font-size: 1.125rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+button {
+    background: var(--button-colour);
+    border: var(--btn-border);
+    color: white;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+input {
+    border: solid 1px #bbb;
+    font-size: 1rem;
+    padding: 0 10px;
+    width: calc(100% - 100px);
+}
+
+input, button {
+    height: 37px;
+}
+
+.start-game {
+    margin-left: auto;
+    width: 100px;
+}
+
+.input-container {
+    display: flex;
+}
+
+/* Animations */
+@keyframes wrong {to { background-color: var(--wrong); } }
+@keyframes correct { to { background-color: var(--correct); } }
+
+#memory-game {
+    margin: 80px auto;
+}
+
+.game-board {
+    display: grid;
+    grid-gap: 10px;
+    margin: 20px 0;
+}
+
+.match-count {
+    font-weight: bold;
+}
+
+.game-status {
+    font-size: 1.025rem;
+}
+
+.match-count,
+.game-status {
+    display: inline;
+}
+
+.tile > div {
+    backface-visibility:hidden;
+    border: var(--border);
+    border-radius: var(--radius);
+    height: 100px;
+    line-height: 100px;
+    overflow: hidden;
+    position: absolute;text-align: center;
+    transition: transform 0.3s linear;
+    transform-style: preserve-3d;
+    width: 100px;
+}
+
+.tile > .front {
+    background-color: var(--grey-bg);
+}
+
+.tile, .tile div {
+    cursor: pointer;
+    user-select: none;
+}
+
+.tile {
+    height: 100px;
+    width: 100px;
+}
+
+.tile > .back {
+    animation: 0.5s ease 0.3s 1 forwards;
+}
+
+.tile.wrong > .back {
+    animation-name: wrong;
+}
+
+.tile.correct > .back {
+    animation-name: correct;
+}
+
+.tile > .back {
+    transform: perspective(100px) rotateY(180deg) translate3d(0px, 0px, 2px);
+}
+
+.tile.correct > .front, .tile.wrong > .front, .tile.revealed > .front {
+    transform: perspective(100px) rotateY(-180deg) translate3d(0px, 0px, 2px);
+}
+
+.tile.correct > .back, .tile.wrong > .back, .tile.revealed > .back {
+    transform: perspective(100px) rotateY(0deg) translate3d(0px, 0px, 1px);
+}
+
+.front {
+    font-size: 2em;
+}
+
+.error {
+    color: red;
+    margin-top: 7px;
+}
+
+.new-game {
+    border-radius: var(--radius);
+    display: block;
+    margin: 0 auto;
+    width: 160px;
+}
